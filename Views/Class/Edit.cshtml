@@ -1,0 +1,17 @@
+@model StudentApp.Models.Class
+
+<h2>Cập nhật lớp học</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ClassId" />
+    <div class="mb-3">
+        <label asp-for="ClassName" class="form-label">Tên lớp</label>
+        <input asp-for="ClassName" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">Mô tả</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Cập nhật</button>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+</form>

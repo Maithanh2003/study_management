@@ -1,0 +1,127 @@
+// Create.cshtml
+@model StudentApp.Models.ViewModels.StudentFormViewModel
+@using StudentApp.Models
+@{
+    ViewData["Title"] = "Thêm sinh viên mới";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">@ViewData["Title"]</h2>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
+
+    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Student.FirstName" class="form-label">Họ</label>
+                <input asp-for="Student.FirstName" class="form-control" required />
+                <span asp-validation-for="Student.FirstName" class="text-danger small"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Student.LastName" class="form-label">Tên</label>
+                <input asp-for="Student.LastName" class="form-control" required />
+                <span asp-validation-for="Student.LastName" class="text-danger small"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="Student.Gender" class="form-label">Giới tính</label>
+                <select asp-for="Student.Gender" asp-items="Html.GetEnumSelectList<GenderType>()" class="form-select"
+                    required></select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Student.DateOfBirth" class="form-label">Ngày sinh</label>
+                <input asp-for="Student.DateOfBirth" type="date" class="form-control" required />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Student.Status" class="form-label">Trạng thái</label>
+                <select asp-for="Student.Status" asp-items="Html.GetEnumSelectList<StudentStatus>()" class="form-select"
+                    required></select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="Student.RollNumber" class="form-label">Mã SV</label>
+                <input asp-for="Student.RollNumber" class="form-control" required />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Student.AdmissionNo" class="form-label">Mã nhập học</label>
+                <input asp-for="Student.AdmissionNo" class="form-control" required />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Student.AdmissionDate" class="form-label">Ngày nhập học</label>
+                <input asp-for="Student.AdmissionDate" type="date" class="form-control" required />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="Student.Religion" class="form-label">Tôn giáo</label>
+                <input asp-for="Student.Religion" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Student.Address" class="form-label">Địa chỉ</label>
+                <input asp-for="Student.Address" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <label asp-for="Student.PhoneNumber" class="form-label">Số điện thoại</label>
+                <input asp-for="Student.PhoneNumber" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                <label asp-for="Student.PhotoUrl" class="form-label">URL ảnh</label>
+                <input asp-for="Student.PhotoUrl" class="form-control" />
+            </div>
+            <div class="col-md-4 mb-3">
+                @* <label asp-for="CurrentClassId" class="form-label">Mã lớp</label>
+                <input asp-for="CurrentClassId" type="number" class="form-control" /> *@
+                <label asp-for="Student.CurrentClassId" class="form-label">Lớp</label>
+                <select asp-for="Student.CurrentClassId" class="form-select"
+                    asp-items="@(new SelectList(Model.Classes, "ClassId", "ClassName"))">
+                    <option value="">-- Chọn lớp --</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="text-end mt-3">
+            <a asp-action="Index" class="btn btn-secondary me-2">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Lưu thông tin
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        (() => {
+            'use strict';
+            window.addEventListener('load', () => {
+                const forms = document.getElementsByClassName('needs-validation');
+                Array.prototype.forEach.call(forms, (form) => {
+                    form.addEventListener('submit', (event) => {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+}

@@ -1,0 +1,43 @@
+// Details.cshtml
+@model StudentApp.Models.Student
+@{
+    ViewData["Title"] = "Chi tiết sinh viên";
+}
+<div class="container mt-4">
+    <h2 class="text-primary">@ViewData["Title"]</h2>
+    <div class="row mt-3">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body text-center">
+                    <img src="@(string.IsNullOrEmpty(Model.PhotoUrl) ? "/images/default-avatar.jpg" : Model.PhotoUrl)"
+                        class="img-thumbnail rounded-circle mb-3" width="150" height="150" />
+                    <h4>@Model.FirstName @Model.LastName</h4>
+                    <p class="text-muted">Mã SV: @Model.RollNumber</p>
+                    <span class="badge bg-@(Model.Status == StudentStatus.Active ? "success" : "warning")">
+                        @Model.Status
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Thông tin chi tiết</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Giới tính:</strong> @Model.Gender</p>
+                    <p><strong>Ngày sinh:</strong> @Model.DateOfBirth.ToShortDateString()</p>
+                    <p><strong>Mã nhập học:</strong> @Model.AdmissionNo</p>
+                    <p><strong>Ngày nhập học:</strong>@Model.DateOfBirth.ToShortDateString()</p>
+                    <p><strong>Tôn giáo:</strong> @Model.Religion</p>
+                    <p><strong>Địa chỉ:</strong> @Model.Address</p>
+                    <p><strong>SĐT:</strong> @Model.PhoneNumber</p>
+                    <p><strong>Lớp:</strong> @Model.CurrentClassId</p>
+                    <a asp-action="Index" class="btn btn-outline-secondary mt-2">
+                        <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

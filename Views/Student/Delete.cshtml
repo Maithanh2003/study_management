@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <div class="card shadow border-danger">
+        <div class="card-header bg-danger text-white text-center">
+            <h4><i class="fas fa-exclamation-triangle"></i> Xác nhận xoá sinh viên</h4>
+        </div>
+        <div class="card-body">
+            <p class="text-danger">
+                Bạn đang chuẩn bị xoá thông tin sinh viên:
+                <strong>@Model.FirstName @Model.LastName</strong><br />
+                <span>Mã học sinh: @Model.RollNumber</span><br />
+                Ngày sinh: @Model.DateOfBirth.ToShortDateString()
+            </p>
+            <p class="fw-bold">Hành động này không thể hoàn tác!</p>
+
+            <form asp-action="DeleteConfirmed" method="post">
+                <input type="hidden" name="studentId" value="@Model.StudentId" />
+                <div class="text-end">
+                    <a asp-action="Index" class="btn btn-secondary me-2">
+                        <i class="fas fa-times"></i> Huỷ bỏ
+                    </a>
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Xác nhận xoá
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

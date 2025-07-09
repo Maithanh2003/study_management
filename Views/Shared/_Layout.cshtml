@@ -1,0 +1,153 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var username = HttpContextAccessor.HttpContext?.User?.Identity?.Name;
+    var isAuthenticated = HttpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated ?? false;
+    ViewData["Title"] ??= "Trang chính";
+
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StudentApp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body>
+    <header class="app-header">
+        <nav class="navbar navbar-expand navbar-light">
+            <div class="container-fluid">
+                @if (isAuthenticated)
+                {
+                    <button class="sidebar-toggle btn btn-link d-md-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                }
+
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-graduation-cap me-2"></i>StudentApp
+                </a>
+
+                <div class="navbar-collapse collapse justify-content-end">
+                    @if (isAuthenticated)
+                    {
+                        <div class="user-dropdown dropdown">
+                            <a class="dropdown-toggle d-flex align-items-center" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="https://ui-avatars.com/api/?name=@username&background=4e73df&color=fff"
+                                    alt="User Avatar" class="user-avatar rounded-circle me-2">
+                                <span class="user-name d-none d-lg-inline">@username</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a asp-controller="User" asp-action="Details" class="dropdown-item">
+                                        <i class="fas fa-user me-2"></i> Hồ sơ
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Cài đặt</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-danger" asp-controller="Account" asp-action="Logout">
+                                        <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="auth-buttons">
+                            <a class="btn btn-outline-primary me-2" asp-controller="Account" asp-action="Login">
+                                <i class="fas fa-sign-in-alt me-1"></i>Đăng nhập
+                            </a>
+                            <a class="btn btn-primary" asp-controller="Account" asp-action="Register">
+                                <i class="fas fa-user-plus me-1"></i>Đăng ký
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="app-wrapper @(isAuthenticated ? "" : "no-sidebar")">
+        @if (isAuthenticated)
+        {
+            <aside class="app-sidebar">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li class="nav-item">
+                            <a asp-controller="Student" asp-action="Index"
+                                class="nav-link @(currentController == "Student" ? "active" : "")">
+                                <i class="fas fa-users nav-icon"></i>
+                                <span class="nav-text">Quản lý Sinh viên</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Class" asp-action="Index"
+                                class="nav-link @(currentController == "Class" ? "active" : "")">
+                                <i class="fas fa-chalkboard nav-icon"></i>
+                                <span class="nav-text">Quản lý Lớp học</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+        }
+
+        <main class="app-content">
+            <div class="container-fluid">
+                <div class="page-header">
+                    <h1>@ViewData["Title"]</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                            @if (currentController != "Home" && currentController != null)
+                            {
+                                <li class="breadcrumb-item"><a href="/@currentController">@currentController</a></li>
+                            }
+                            @if (currentAction != "Index" && currentAction != null && currentController != "Home")
+                            {
+                                <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+                            }
+                            else if (currentAction == "Index" && currentController != "Home")
+                            {
+                                <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+                            }
+                        </ol>
+                    </nav>
+                </div>
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+
+    <footer class="app-footer @(isAuthenticated ? "" : "no-sidebar-footer")">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>&copy; @DateTime.Now.Year - StudentApp</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p>Phiên bản 1.0.0</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

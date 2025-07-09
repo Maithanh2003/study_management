@@ -1,0 +1,51 @@
+@{
+    ViewData["Title"] = "Đăng nhập";
+}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 col-md-6">
+            <div class="card shadow border-0 rounded-4">
+                <div class="card-header bg-gradient bg-primary text-white text-center rounded-top-4">
+                    <h4 class="mb-0">👋 Chào mừng bạn trở lại</h4>
+                    <small>Vui lòng đăng nhập để tiếp tục</small>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Login" method="post" novalidate>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Tên đăng nhập</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" name="username" id="username" class="form-control"
+                                    placeholder="Nhập tên đăng nhập" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mật khẩu</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" name="password" id="password" class="form-control"
+                                    placeholder="Nhập mật khẩu" required />
+                            </div>
+                        </div>
+
+                        @if (ViewBag.Message != null)
+                        {
+                            <div class="alert alert-danger text-center">@ViewBag.Message</div>
+                        }
+
+                        <div class="d-grid mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <small>Chưa có tài khoản? <a asp-action="Register">Đăng ký ngay</a></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
