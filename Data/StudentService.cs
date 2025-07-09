@@ -156,3 +156,83 @@ namespace StudentApp.Data
         }
     }
 }
+// using Microsoft.EntityFrameworkCore;
+// using StudentApp.Models;
+
+// namespace StudentApp.Data
+// {
+//     public class StudentService
+//     {
+//         private readonly AppDbContext _context;
+
+//         public StudentService(AppDbContext context)
+//         {
+//             _context = context;
+//         }
+
+//         // ✅ Lấy tất cả lớp học
+//         public List<Class> GetAllClasses()
+//         {
+//             return _context.Classes
+//                 .Select(c => new Class
+//                 {
+//                     ClassId = c.ClassId,
+//                     ClassName = c.ClassName
+//                 })
+//                 .ToList();
+//         }
+
+//         // ✅ Lấy tất cả sinh viên (có thể tìm kiếm)
+//         public List<Student> GetAll(string? search = null)
+//         {
+//             var query = _context.Students
+//                 .Include(s => s.CurrentClass)
+//                 .Include(s => s.User)
+//                 .AsQueryable();
+
+//             if (!string.IsNullOrWhiteSpace(search))
+//             {
+//                 query = query.Where(s =>
+//                     EF.Functions.ILike(s.FirstName, $"%{search}%") ||
+//                     EF.Functions.ILike(s.LastName, $"%{search}%")
+//                 );
+//             }
+
+//             return query.ToList();
+//         }
+
+//         // ✅ Thêm sinh viên mới
+//         public void Add(Student student)
+//         {
+//             try
+//             {
+//                 _context.Students.Add(student);
+//                 _context.SaveChanges();
+//             }
+//             catch (DbUpdateException ex) when (ex.InnerException?.Message.Contains("admission_no") == true)
+//             {
+//                 throw new Exception("Admission No đã tồn tại trong hệ thống.");
+//             }
+//         }
+
+//         // ✅ Xoá sinh viên
+//         public void Delete(int id)
+//         {
+//             var student = _context.Students.Find(id);
+//             if (student != null)
+//             {
+//                 _context.Students.Remove(student);
+//                 _context.SaveChanges();
+//             }
+//         }
+
+//         // ✅ Tìm theo ID
+//         public Student? GetById(int id)
+//         {
+//             return _context.Students
+//                 .Include(s => s.User)
+//                 .Include(s => s.CurrentClass)
+//                 .FirstOrDefault(s => s.StudentId == id);
+//         }
+//     }
+// }
