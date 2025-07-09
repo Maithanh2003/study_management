@@ -37,7 +37,7 @@ namespace StudentApp.Data
                 {
                     ClassId = reader.GetInt32(reader.GetOrdinal("class_id")),
                     ClassName = reader.GetString(reader.GetOrdinal("class_name")),
-                    Description = reader.GetString(reader.GetOrdinal("description"))
+                    Description = reader.IsDBNull(reader.GetOrdinal("description")) ? "" : reader.GetString(reader.GetOrdinal("description"))
                 });
             }
             return classes;

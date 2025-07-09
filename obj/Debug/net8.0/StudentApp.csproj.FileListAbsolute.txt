@@ -26,6 +26,7 @@
 /Users/apple/Desktop/Mac folder/study/StudentApp/obj/Debug/net8.0/StudentApp.MvcApplicationPartsAssemblyInfo.cache
 /Users/apple/Desktop/Mac folder/study/StudentApp/obj/Debug/net8.0/StudentApp.RazorAssemblyInfo.cache
 /Users/apple/Desktop/Mac folder/study/StudentApp/obj/Debug/net8.0/StudentApp.RazorAssemblyInfo.cs
+/Users/apple/Desktop/Mac folder/study/StudentApp/obj/Debug/net8.0/StudentApp.sourcelink.json
 /Users/apple/Desktop/Mac folder/study/StudentApp/obj/Debug/net8.0/staticwebassets.build.json
 /Users/apple/Desktop/Mac folder/study/StudentApp/obj/Debug/net8.0/staticwebassets.development.json
 /Users/apple/Desktop/Mac folder/study/StudentApp/obj/Debug/net8.0/staticwebassets/msbuild.StudentApp.Microsoft.AspNetCore.StaticWebAssets.props
