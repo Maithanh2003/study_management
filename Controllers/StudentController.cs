@@ -3,6 +3,7 @@ using StudentApp.Data;
 using StudentApp.Models;
 using StudentApp.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using StudentApp.DTO.Requests;
 
 namespace StudentApp.Controllers
 {
@@ -23,13 +24,13 @@ namespace StudentApp.Controllers
             return View(students);
         }
 
-        // GET: /Student/Create
+        [HttpGet]
         public IActionResult Create()
         {
             var viewModel = new StudentFormViewModel
             {
-                Student = new Student(),
-                Classes = _service.GetAllClasses() // Phải trả về List<Class> không null
+                Student = new StudentCreateRequest(),
+                Classes = _service.GetAllClasses()
             };
             return View(viewModel);
         }
@@ -43,7 +44,6 @@ namespace StudentApp.Controllers
             {
                 try
                 {
-                    viewModel.Student.CreatedAt = DateTime.Now;
                     _service.Add(viewModel.Student);
                     return RedirectToAction("Index");
                 }

@@ -4,10 +4,10 @@ using Microsoft.IdentityModel.Tokens;
 using StudentApp.Data;
 using StudentApp.Utils;
 using System.Text;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
+// 💡 Add services
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<StudentService>();
 builder.Services.AddScoped<UserService2>();
@@ -17,10 +17,9 @@ builder.Services.AddScoped<ClassService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
-
-
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 builder.Services.AddSession();
 builder.Services.AddAuthorization();
@@ -44,7 +43,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
 
-        options.TokenValidationParameters = new()
+        options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
@@ -55,7 +54,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
         };
     });
-
 
 var app = builder.Build();
 

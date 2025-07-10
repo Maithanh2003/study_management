@@ -42,7 +42,13 @@ namespace StudentApp.Controllers
 
             HttpContext.Session.SetString("Username", user.Username);
             HttpContext.Session.SetInt32("UserId", user.UserId);
-            return RedirectToAction("Index", "Student");
+            HttpContext.Session.SetString("Role", user.Role.ToString());
+
+            // return RedirectToAction("Index", "Student");
+            if (user.Role == UserRole.ADMIN)
+                return RedirectToAction("Index", "Student");
+            else
+                return RedirectToAction("Dashboard", "StudentPortal");
         }
 
         // GET: /Account/Register

@@ -12,6 +12,10 @@ namespace StudentApp.Controllers
         {
             _userService = userService;
         }
+        public IActionResult Index()
+        {
+            return RedirectToAction("Details");
+        }
 
 
         // GET: /User/Details/5
@@ -55,7 +59,6 @@ namespace StudentApp.Controllers
                 return View("~/Views/Account/ChangePassword.cshtml", model);
             }
 
-            // Cập nhật mật khẩu
             _userService.UpdatePassword(user.UserId, model.NewPassword);
 
             ViewBag.Message = "Đổi mật khẩu thành công!";

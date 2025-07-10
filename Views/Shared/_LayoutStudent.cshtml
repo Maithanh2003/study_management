@@ -1,0 +1,83 @@
+@{
+    var username = Context.Session.GetString("Username") ?? "Học viên";
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - Student Portal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Custom Student CSS -->
+    <link rel="stylesheet" href="~/css/student.css" asp-append-version="true" />
+
+    <!-- Site CSS (nếu có) -->
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+
+        .sidebar {
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            display: block;
+            padding: 12px;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover {
+            background-color: #e2e6ea;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-2 sidebar">
+                <h5 class="text-center text-primary">Xin chào, @username</h5>
+
+                <a asp-controller="StudentPortal" asp-action="Dashboard">
+                    <i class="fas fa-home me-2"></i>Trang chính
+                </a>
+
+                <a asp-controller="StudentPortal" asp-action="ClassList">
+                    <i class="fas fa-list me-2"></i>Danh sách lớp
+                </a>
+
+                <a asp-controller="StudentPortal" asp-action="Enroll">
+                    <i class="fas fa-clipboard-check me-2"></i>Đăng ký lớp
+                </a>
+
+                <a asp-controller="User" asp-action="Details">
+                    <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                </a>
+
+                <a asp-controller="Account" asp-action="Logout">
+                    <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                </a>
+            </nav>
+
+
+            <!-- Main Content -->
+            <main role="main" class="col-md-10 ms-sm-auto px-4 py-4">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

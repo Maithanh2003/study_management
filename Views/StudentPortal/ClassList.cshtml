@@ -1,0 +1,54 @@
+@model List<StudentApp.Models.Class>
+@{
+    ViewData["Title"] = "Danh sách lớp";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h2 class="fw-bold text-primary">
+            <i class="fas fa-chalkboard-teacher me-2"></i>Danh sách lớp học
+        </h2>
+        <a href="@Url.Action("Enroll")" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Đăng ký lớp mới
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-light">
+            <h5 class="card-title mb-0">Các lớp hiện có</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="py-3 px-4">Tên lớp</th>
+                            <th class="py-3 px-4">Mô tả</th>
+                            <th class="py-3 px-4">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cls in Model)
+                        {
+                            <tr>
+                                <td class="py-3 px-4 align-middle fw-semibold">@cls.ClassName</td>
+                                <td class="py-3 px-4 align-middle">@cls.Description</td>
+                                <td class="py-3 px-4 align-middle">
+                                    <a href="#" class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-info-circle me-1"></i>Chi tiết
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer bg-light">
+            <div class="text-muted small">
+                Hiển thị <strong>@Model.Count</strong> lớp học
+            </div>
+        </div>
+    </div>
+</div>

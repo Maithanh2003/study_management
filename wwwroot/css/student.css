@@ -1,0 +1,76 @@
+/* === Global Styles === */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* === Card Styles === */
+.student-card {
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    font-weight: 600;
+}
+
+/* === Form Styles === */
+.needs-validation .form-control:invalid,
+.needs-validation .form-select:invalid {
+    border-color: #dc3545;
+}
+
+.needs-validation .form-control:valid,
+.needs-validation .form-select:valid {
+    border-color: #28a745;
+}
+
+/* === Button Styles === */
+.btn-student-primary {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+    color: white;
+}
+
+.btn-student-primary:hover {
+    background-color: #303f9f;
+    border-color: #303f9f;
+}
+
+/* === Table Styles === */
+.student-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.student-table thead th {
+    background-color: #f1f5f9;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.student-table tbody tr:hover {
+    background-color: rgba(63, 81, 181, 0.05);
+}
+
+/* === Alert Styles === */
+.alert-student {
+    border-left: 4px solid;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+    .student-card {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-select-lg {
+        font-size: 1rem;
+    }
+}
