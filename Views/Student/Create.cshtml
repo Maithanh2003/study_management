@@ -18,7 +18,7 @@
         </div>
     }
 
-    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+    <form asp-action="Create" method="post" class="needs-validation" enctype="multipart/form-data" novalidate>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <label asp-for="Student.FirstName" class="form-label">Họ</label>
@@ -82,11 +82,10 @@
             </div>
             <div class="col-md-4 mb-3">
                 <label asp-for="Student.PhotoUrl" class="form-label">URL ảnh</label>
-                <input asp-for="Student.PhotoUrl" class="form-control" />
+                <input asp-for="Student.PhotoUrl" type="file" name="Photo" class="form-control" />
             </div>
+
             <div class="col-md-4 mb-3">
-                @* <label asp-for="CurrentClassId" class="form-label">Mã lớp</label>
-                <input asp-for="CurrentClassId" type="number" class="form-control" /> *@
                 <label asp-for="Student.CurrentClassId" class="form-label">Lớp</label>
                 <select asp-for="Student.CurrentClassId" class="form-select"
                     asp-items="@(new SelectList(Model.Classes, "ClassId", "ClassName"))">

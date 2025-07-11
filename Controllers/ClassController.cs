@@ -15,10 +15,18 @@ namespace StudentApp.Controllers
             _service = service;
         }
 
-        public IActionResult Index(string? search)
+        public IActionResult Index(string? search, int page = 1)
         {
-            var classes = _service.GetAllClass(search);
-            ViewBag.SearchQuery = search;
+            int pageSize = 2;
+            var classes = _service.GetAllClass(search, page, pageSize);
+
+            ViewData["Search"] = search;
+            ViewData["RouteValues"] = new Dictionary<string, string>
+    {
+        { "search", search ?? "" }
+    };
+            ViewData["Action"] = "Index";
+
             return View(classes);
         }
 
@@ -107,6 +115,17 @@ namespace StudentApp.Controllers
                 TempData["Error"] = "Lỗi xóa lớp: " + ex.Message;
                 return RedirectToAction("Index");
             }
+        }
+
+        public IActionResult StudentsInClass(int classId)
+        {
+            var students = _service.GetStudentsByClassId(classId);
+            var classInfo = _service.GetById(classId);
+
+            if (classInfo == null) return NotFound();
+
+            ViewBag.ClassName = classInfo.ClassName;
+            return View(students);
         }
     }
 }

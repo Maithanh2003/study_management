@@ -1,0 +1,96 @@
+@model StudentApp.Models.ViewModels.StudentEditViewModel
+@using StudentApp.Models
+
+@{
+    ViewData["Title"] = "Chỉnh sửa sinh viên";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4 text-primary">@ViewData["Title"]</h2>
+
+    <form asp-action="Edit" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+        <input type="hidden" asp-for="Student.StudentId" />
+
+        <div class="col-md-6">
+            <label asp-for="Student.FirstName" class="form-label">Họ</label>
+            <input asp-for="Student.FirstName" class="form-control" required />
+            <span asp-validation-for="Student.FirstName" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Student.LastName" class="form-label">Tên</label>
+            <input asp-for="Student.LastName" class="form-control" required />
+            <span asp-validation-for="Student.LastName" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="Student.Gender" class="form-label">Giới tính</label>
+            <select asp-for="Student.Gender" asp-items="Html.GetEnumSelectList<GenderType>()"
+                class="form-select"></select>
+        </div>
+
+
+        <div class="col-md-4">
+            <label asp-for="Student.DateOfBirth" class="form-label">Ngày sinh</label>
+            <input asp-for="Student.DateOfBirth" type="date" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="Student.Status" class="form-label">Trạng thái</label>
+            <select asp-for="Student.Status" asp-items="Html.GetEnumSelectList<StudentStatus>()"
+                class="form-select"></select>
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="Student.RollNumber" class="form-label">Mã SV</label>
+            <input asp-for="Student.RollNumber" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="Student.AdmissionNo" class="form-label">Mã nhập học</label>
+            <input asp-for="Student.AdmissionNo" class="form-control" />
+        </div>
+
+        <div class="col-md-4">
+            <label asp-for="Student.AdmissionDate" class="form-label">Ngày nhập học</label>
+            <input asp-for="Student.AdmissionDate" type="date" class="form-control" />
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Student.Address" class="form-label">Địa chỉ</label>
+            <input asp-for="Student.Address" class="form-control" />
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Student.PhoneNumber" class="form-label">Số điện thoại</label>
+            <input asp-for="Student.PhoneNumber" class="form-control" />
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Student.Religion" class="form-label">Tôn giáo</label>
+            <input asp-for="Student.Religion" class="form-control" />
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Student.CurrentClassId" class="form-label">Lớp</label>
+            <select asp-for="Student.CurrentClassId"
+                asp-items="@(new SelectList(Model.Classes, "ClassId", "ClassName"))" class="form-select">
+                <option value="">-- Chọn lớp --</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="Photo" class="form-label">Ảnh đại diện (tùy chọn)</label>
+            <input type="file" name="Photo" class="form-control" />
+        </div>
+
+        <div class="col-12 text-end">
+            <a asp-action="Index" class="btn btn-secondary me-2">
+                <i class="fas fa-arrow-left"></i> Quay lại
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Cập nhật
+            </button>
+        </div>
+    </form>
+</div>
