@@ -54,3 +54,4 @@
 # Project specific files (if you have any generated files in project)
 # Example: If your project generates some specific output files that are not DLLs
 # /YourProjectName/GeneratedFiles/
+appsettings.Development.json 
