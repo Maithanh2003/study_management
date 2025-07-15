@@ -55,3 +55,4 @@
 # Example: If your project generates some specific output files that are not DLLs
 # /YourProjectName/GeneratedFiles/
 appsettings.Development.json 
+/appsettings.json
